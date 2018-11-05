@@ -5,7 +5,14 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class Simpsons1DIntegratorTest {
-
+	
+	// Test the 1D Simpson's Rule integrator on some well known
+	// example integrals.
+	// Test that the weights used in the sum within Simpson's Rule
+	// are correct for some examples.
+	// Test that the integrator, and the weight function, throw
+	// exceptions for bad arguments.
+	
 	@Test
 	public void testSimpsons1DIntegrator() {
 		double exactIntegral1 = (double) 1/3;

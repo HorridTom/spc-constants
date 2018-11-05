@@ -3,10 +3,23 @@ package uk.ac.ic.clahrc.spc.tw;
 
 public class Simpsons2DIntegrator {
 
+	// Interface for the function to be integrated
 	public interface Integrand {
 		public double func(double xVar, double yVar, double... params);
 	}
-
+	
+	/**Method returning Simpson's Rule approximation to the
+	integral specified.
+	@param integrand specifies the integrand
+	@param xLowLimit the lower limit of the integral in the first variable (x)
+	@param xHighLimit the upper limit of the integral in the first variable (x)
+	@param yLowLimit the lower limit of the integral in the second variable (y)
+	@param yHighLimit the upper limit of the integral in the second variable (y)
+	@param xStrips specifies number of strips to use in the first coordinate (x)
+	@param yStrips specifies number of strips to use in the second coordinate (y)
+	@param params passes parameters to the integrand
+	@exception IllegalArgumentException if a parameter is bad.
+	*/
 	public static double integrate(Integrand integrand, double xLowLimit, double xHighLimit,
 			double yLowLimit, double yHighLimit, int xStrips, int yStrips, double... params) {
 		
@@ -38,7 +51,13 @@ public class Simpsons2DIntegrator {
 		return (xHighLimit - xLowLimit) * (yHighLimit - yLowLimit) * sumTotal;
 	}
 
-	
+	/**Supplies the weights used in 2D version of Simpson's Rule
+	 @param i between 0 and xStrips specifies which x strip
+	 @param j between 0 and yStrips specifies which y strip
+	 @param xStrips positive and even number of x strips
+	 @param yStrips positive and even number of y strips
+	 @exception IllegalArgumentException if a parameter does not comply.
+	*/
 	public static int weight(int i, int j, int xStrips, int yStrips) {
 		
 		if (xStrips < 2 || xStrips % 2 == 1 || yStrips < 2 || yStrips % 2 == 1) {

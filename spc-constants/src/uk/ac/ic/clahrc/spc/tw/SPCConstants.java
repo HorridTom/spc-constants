@@ -27,6 +27,9 @@ public class SPCConstants {
 	}
 	
 	public static class d2TransformedIntegrand implements Simpsons1DIntegrator.Integrand {
+		
+		// This integrand is a transformation of that given in
+		// the Western Electric Handbook
 		public double func(double xVar, double... params) {
 			if(Math.abs(xVar) < 0.0000001) {
 				return (double) 0;
@@ -40,10 +43,16 @@ public class SPCConstants {
 	}
 	
 	public static class d3TransformedIntegrand implements Simpsons2DIntegrator.Integrand {
+		
+		// This integrand is a transformation of that given in
+		// the Western Electric Handbook. Specifically it is a
+		// rotation of the half plane to the upper half plane,
+		// facilitating application of Simpson's Rule.
 		public double func(double xVar, double yVar, double... params) {
 			
 			NormalDistribution nDist = new NormalDistribution();
 			
+			// Coordinate transformation
 			double x = (xVar + yVar) / 2;
 			double y = (xVar - yVar) / 2;
 			
@@ -53,14 +62,9 @@ public class SPCConstants {
 			double d3integrand = 1 - Math.pow(PhiX, params[0]) - Math.pow(1 - PhiY, params[0]) +
 					Math.pow(PhiX - PhiY, params[0]);
 			
+			// The Jacobian of this transformation is 0.5
 			return (double)0.5 * d3integrand;
 		}
 	}
 	
-	
-	/*public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}*/
-
 }

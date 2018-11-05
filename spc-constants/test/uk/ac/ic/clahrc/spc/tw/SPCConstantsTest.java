@@ -8,12 +8,8 @@ import org.junit.Test;
 
 public class SPCConstantsTest {
 	
-	/*SPCConstants spcConst;
-	
-	@Before
-	public void setUp() {
-		this.spcConst = new SPCConstants();
-	}*/
+	// Test values of d2 and d3 against those tabulated in
+	// Wheeler, Advanced Statistical Process Control
 	
 	@Test
 	public void testConstantD2() {

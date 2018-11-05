@@ -7,6 +7,13 @@ import org.junit.Test;
 
 public class Simpsons2DIntegratorTest {
 
+	// Test the 1D Simpson's Rule integrator on some well known
+	// example integrals.
+	// Test that the weights used in the sum within Simpson's Rule
+	// are correct for some examples.
+	// Test that the integrator, and the weight function, throw
+	// exceptions for bad arguments.
+	
 	@Test
 	public void testSimpsons2DIntegrator() {
 		double exact_integral_1 = (double) 1/9;

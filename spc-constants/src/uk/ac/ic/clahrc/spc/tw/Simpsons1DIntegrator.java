@@ -3,10 +3,20 @@ package uk.ac.ic.clahrc.spc.tw;
 
 public class Simpsons1DIntegrator {
 	
+	// Interface for the function to be integrated
 	public interface Integrand {
 		public double func(double xVar, double... params);
 	}
-
+	
+	/**Method returning Simpson's Rule approximation to the
+	integral specified.
+	@param integrand specifies the integrand
+	@param xLowLimit the lower limit of the integral
+	@param xHighLimit the upper limit of the integral
+	@param nStrips specifies the number of strips to be used
+	@param params passes parameters to the integrand
+	@exception IllegalArgumentException if a parameter is bad.
+	*/
 	public static double integrate(Integrand integrand, double xLowLimit, double xHighLimit,
 			int nStrips, double... params) {
 		
@@ -33,7 +43,7 @@ public class Simpsons1DIntegrator {
 		return approximation;
 	}
 	
-	/**
+	/**Supplies the weights used in Simpson's Rule
 	 @param i between 0 and nStrips
 	 @param nStrips positive and even
 	 @exception IllegalArgumentException if a parameter does not comply.
