@@ -35,9 +35,9 @@ public class SPCConstantsTest {
 		double d3_n_10 = SPCConstants.d3(10);
 		double d3_n_100 = SPCConstants.d3(100);
 		
-		assertEquals(0.8525, d3_n_2, 0.00001);
-		assertEquals(0.8884, d3_n_3, 0.00001);
-		assertEquals(0.7971, d3_n_10, 0.00001);
+		assertEquals(0.8525, d3_n_2, 0.0001);
+		assertEquals(0.8884, d3_n_3, 0.0001);
+		assertEquals(0.7971, d3_n_10, 0.0001);
 		assertEquals(0.6052, d3_n_100, 0.0001);
 	}
 	
