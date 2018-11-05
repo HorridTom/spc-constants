@@ -11,13 +11,16 @@ public class Simpsons2DIntegratorTest {
 	public void testSimpsons2DIntegrator() {
 		double exact_integral_1 = (double) 1/9;
 		double correct_answer_integral_2 = (double) 1.1351*2;
+		double exact_integral_3 = (double) 8/9;
 		
 		double simpsons_integral_1 = Simpsons2DIntegrator.integrate(new sqrIntegrand(), 0, 1, 0, 1, 10, 10);
 		double simpsons_integral_2 = Simpsons2DIntegrator.integrate(
 				new expSqrIntegrand(), 0, 1, 0, 1, 1000, 1000, 2);
+		double simpsons_integral_3 = Simpsons2DIntegrator.integrate(new sqrIntegrand(), 0, 2, 0, 1, 10, 10);
 		
 		assertEquals(exact_integral_1, simpsons_integral_1, 0.0001);
 		assertEquals(correct_answer_integral_2, simpsons_integral_2, 0.0001);
+		assertEquals(exact_integral_3, simpsons_integral_3, 0.0001);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)

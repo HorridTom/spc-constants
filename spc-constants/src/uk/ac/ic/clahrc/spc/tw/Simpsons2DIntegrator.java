@@ -35,7 +35,7 @@ public class Simpsons2DIntegrator {
 			}
 		}
 		
-		return sumTotal;
+		return (xHighLimit - xLowLimit) * (yHighLimit - yLowLimit) * sumTotal;
 	}
 
 	
