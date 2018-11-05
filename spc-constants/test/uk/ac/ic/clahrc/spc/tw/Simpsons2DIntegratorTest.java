@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+
 public class Simpsons2DIntegratorTest {
 
 	@Test
@@ -11,12 +12,27 @@ public class Simpsons2DIntegratorTest {
 		double exact_integral_1 = (double) 1/9;
 		double correct_answer_integral_2 = (double) 1.1351*2;
 		
-		double simpsons_integral_1 = Simpsons2DIntegrator.integrate(new sqrIntegrand(), 0, 1, 0, 1, 1000);
+		double simpsons_integral_1 = Simpsons2DIntegrator.integrate(new sqrIntegrand(), 0, 1, 0, 1, 10, 10);
 		double simpsons_integral_2 = Simpsons2DIntegrator.integrate(
-				new expSqrIntegrand(), 0, 1, 0, 1, 1000, 2);
+				new expSqrIntegrand(), 0, 1, 0, 1, 1000, 1000, 2);
 		
 		assertEquals(exact_integral_1, simpsons_integral_1, 0.0001);
 		assertEquals(correct_answer_integral_2, simpsons_integral_2, 0.0001);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testIntegrateInvalidStripsOdd() {
+		Simpsons2DIntegrator.integrate(new sqrIntegrand(), 0, 1, 0, 1, 3, 4);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testIntegrateInvalidStripsZero() {
+		Simpsons2DIntegrator.integrate(new sqrIntegrand(), 0, 1, 0, 1, 0, 4);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testIntegrateInvalidLimits() {
+		Simpsons2DIntegrator.integrate(new sqrIntegrand(), 1, 0, 0, 1, 4, 4);
 	}
 	
 	@Test
@@ -67,6 +83,46 @@ public class Simpsons2DIntegratorTest {
 		assertEquals(2, Simpsons2DIntegrator.weight(554, 0, 1000, 1000));
 		
 		
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testWeightsInvalid0xStrips() {
+		Simpsons2DIntegrator.weight(0, 0, 0, 1);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testWeightsInvalid0yStrips() {
+		Simpsons2DIntegrator.weight(0, 0, 1, 0);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testWeightsInvalidOddxStrips() {
+		Simpsons2DIntegrator.weight(5, 5, 7, 8);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testWeightsInvalidOddyStrips() {
+		Simpsons2DIntegrator.weight(5, 5, 8, 7);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testWeightsInvalidI() {
+		Simpsons2DIntegrator.weight(13, 12, 12, 12);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testWeightsInvalidJ() {
+		Simpsons2DIntegrator.weight(12, 13, 12, 12);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testWeightsInvalidNegativeI() {
+		Simpsons2DIntegrator.weight(-1, 2, 4, 4);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testWeightsInvalidNegativeJ() {
+		Simpsons2DIntegrator.weight(2, -2, 4, 4);
 	}
 	
 	public class sqrIntegrand implements Simpsons2DIntegrator.Integrand {
