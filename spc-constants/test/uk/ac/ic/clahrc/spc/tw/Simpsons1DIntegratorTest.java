@@ -46,6 +46,27 @@ public class Simpsons1DIntegratorTest {
 		assertEquals(4, Simpsons1DIntegrator.weight(365, 1000));
 		assertEquals(2, Simpsons1DIntegrator.weight(896, 1000));
 		assertEquals(1, Simpsons1DIntegrator.weight(1000, 1000));
+		
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testWeightsInvalid0Strips() {
+		Simpsons1DIntegrator.weight(0, 0);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testWeightsInvalidOddStrips() {
+		Simpsons1DIntegrator.weight(5, 11);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testWeightsInvalidI() {
+		Simpsons1DIntegrator.weight(13, 12);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testWeightsInvalidNegativeI() {
+		Simpsons1DIntegrator.weight(-1, 2);
 	}
 	
 	public class sqrIntegrand implements Simpsons1DIntegrator.Integrand {
