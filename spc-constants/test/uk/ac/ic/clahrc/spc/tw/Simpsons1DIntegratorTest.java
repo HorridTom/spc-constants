@@ -8,14 +8,29 @@ public class Simpsons1DIntegratorTest {
 
 	@Test
 	public void testSimpsons1DIntegrator() {
-		double exact_integral_1 = 1/3;
-		double correct_answer_integral_2 = 1.46265*2;
+		double exactIntegral1 = (double) 1/3;
+		double correct_answer_integral_2 = (double) 1.46265*2;
 		
 		double simpsons_integral_1 = Simpsons1DIntegrator.integrate(new sqrIntegrand(), 0, 1, 2);
 		double simpsons_integral_2 = Simpsons1DIntegrator.integrate(new expSqrIntegrand(), 0, 1, 1000, 2);
 		
-		assertEquals(exact_integral_1, simpsons_integral_1, 0.0000001);
+		assertEquals(exactIntegral1, simpsons_integral_1, 0.0000001);
 		assertEquals(correct_answer_integral_2, simpsons_integral_2, 0.0001);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testIntegrateInvalidStripsOdd() {
+		Simpsons1DIntegrator.integrate(new sqrIntegrand(), 0, 1, 3);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testIntegrateInvalidStripsZero() {
+		Simpsons1DIntegrator.integrate(new sqrIntegrand(), 0, 1, 0);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testIntegrateInvalidLimits() {
+		Simpsons1DIntegrator.integrate(new sqrIntegrand(), 1, 0, 4);
 	}
 	
 	@Test
