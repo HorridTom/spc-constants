@@ -9,8 +9,28 @@ public class Simpsons1DIntegrator {
 
 	public static double integrate(Integrand integrand, double xLowLimit, double xHighLimit,
 			int nStrips, double... params) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		if (nStrips < 2 || nStrips % 2 == 1) {
+			throw new IllegalArgumentException(
+					"Illegal number of strips, must be positive even integer.");
+		}
+		if(xLowLimit >= xHighLimit) {
+			throw new IllegalArgumentException(
+					"Invalid limits.");
+		}
+		
+		double stripWidth = (xHighLimit - xLowLimit) / nStrips;
+		
+		double sumTotal = 0;
+		
+		for (int t = 0; t <= nStrips ; t++) {
+			double x = xLowLimit + t * stripWidth;
+			sumTotal += Simpsons1DIntegrator.weight(t, nStrips) * integrand.func(x, params);
+		}
+		
+		double approximation = (stripWidth/3)*sumTotal;
+		
+		return approximation;
 	}
 	
 	/**
