@@ -24,6 +24,11 @@ public class SPCConstantsTest {
 		assertEquals((double)5.015, d2_n_100, 0.001);
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void testD2BadArg() {
+		SPCConstants.d2(1);
+	}
+	
 	@Test
 	public void testConstantD3() {
 		double d3_n_2 = SPCConstants.d3(2);
@@ -35,6 +40,11 @@ public class SPCConstantsTest {
 		assertEquals(0.8884, d3_n_3, 0.0001);
 		assertEquals(0.7971, d3_n_10, 0.0001);
 		assertEquals(0.6052, d3_n_100, 0.0001);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testD3BadArg() {
+		SPCConstants.d3(1);
 	}
 	
 }

@@ -7,14 +7,32 @@ import uk.ac.ic.clahrc.spc.tw.Simpsons1DIntegrator;
 public class SPCConstants {
 
 
+	/**Method returning the d2 constant
+	@param i number of observations 
+	@exception IllegalArgumentException if fewer than 2 observations
+	*/
 	public static double d2(int i) {
+		
+		if (i < 2) {
+			throw new IllegalArgumentException(
+					"Constant not defined.");
+		}
 		
 		double d2Result = 2 * Simpsons1DIntegrator.integrate(new d2TransformedIntegrand(), 0, 1, 500, i);
 		
 		return d2Result;
 	}
 
+	/**Method returning the d3 constant
+	@param i number of observations 
+	@exception IllegalArgumentException if fewer than 2 observations
+	*/
 	public static double d3(int i) {
+		
+		if (i < 2) {
+			throw new IllegalArgumentException(
+					"Constant not defined.");
+		}
 		
 		double d3Integral = Simpsons2DIntegrator.integrate(new d3TransformedIntegrand(),
 				-10, 10, 0, 10, 50, 50, i);
